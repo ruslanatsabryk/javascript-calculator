@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background: lightcyan;
+    margin: 0;
+}
+.calc {
+    padding: 5px;
+    border: 1px solid red;
+    height: 100vh;
+    display: grid;
+    grid: repeat(6, minmax(10vh, 50px)) / repeat(4, 90px);
+    gap: 3px;
+    place-content: center;
+}
+.screen, .button {
+    border: 1px solid green;
+}
+.button {
+    line-height: 0.8;
+    font-size: max(1rem, calc(1rem + 2.5vh));
+    display: grid;
+    place-items: center;
+}
+.screen {
+    grid-column: 1/5;
+    text-align: right;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.screen-top {
+    text-align: inherit;
+    font-size: 300%;
+    /* border: 1px solid red; */
+}
+.screen-bottom {
+    text-align: inherit;
+    font-size: 2rem;
+    font-weight: bold;
+    /* border: 1px solid red; */
+}
+
+.clear {
+    grid-column: span 2;
+}
