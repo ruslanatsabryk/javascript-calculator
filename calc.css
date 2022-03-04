@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    background: lightcyan;
+    background: linear-gradient(to bottom, #54a7ff, #87e1ff, #fff199, #ffd663);
     margin: 0;
 }
 .calc {
@@ -15,13 +15,16 @@ body {
     place-content: center;
 }
 .screen, .button {
-    border: 1px solid green;
+    /* border: 1px solid green; */
+    box-shadow: inset 0 0 10px blue; 
+
 }
 .button {
     line-height: 0.8;
     font-size: max(1rem, calc(1rem + 2.5vh));
     display: grid;
     place-items: center;
+    
 }
 .screen {
     grid-column: 1/5;
@@ -33,7 +36,7 @@ body {
 }
 .screen-top {
     text-align: inherit;
-    font-size: 300%;
+    font-size: max(1rem, calc(1rem + 3vh));
     /* border: 1px solid red; */
 }
 .screen-bottom {
