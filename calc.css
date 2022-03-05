@@ -10,13 +10,13 @@ body {
     border: 1px solid red;
     height: 100vh;
     display: grid;
-    grid: repeat(6, minmax(10vh, 50px)) / repeat(4, 90px);
+    grid: minmax(20vh, 80px) repeat(5, minmax(10vh, 50px)) / repeat(4, 90px);
     gap: 3px;
     place-content: center;
 }
 .screen, .button {
     /* border: 1px solid green; */
-    box-shadow: inset 0 0 10px blue; 
+    box-shadow: inset 0 0 8px blue;
 
 }
 .button {
@@ -24,12 +24,11 @@ body {
     font-size: max(1rem, calc(1rem + 2.5vh));
     display: grid;
     place-items: center;
-    
 }
 .screen {
     grid-column: 1/5;
     text-align: right;
-    padding: 5px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -41,9 +40,15 @@ body {
 }
 .screen-bottom {
     text-align: inherit;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     /* border: 1px solid red; */
+}
+
+.screen-top-text {
+    display: inline-block;
+    /* border: 1px solid black;
+    background: red; */
 }
 
 .clear {

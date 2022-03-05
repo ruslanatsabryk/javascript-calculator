@@ -78,7 +78,7 @@ class Calculator {
     }
 
     pressOperation(operation) {
-        let lastChar = this.calcString[this.calcString.length - 1];
+        // let lastChar = this.calcString[this.calcString.length - 1];
         if (this.pressedBefore == 'operation' || this.pressedBefore == 'backspace') {
             this.calcString = this.calcString.slice(0, -1)
         }
@@ -120,9 +120,14 @@ class Calculator {
     }
 }
 
-screenTop = document.querySelector('.screen-top');
-screenBottom = document.querySelector('.screen-bottom');
-calc = new Calculator(screenTop, screenBottom);
+// let calcBox = document.querySelector('.calc');
+let screen = document.querySelector('.screen');
+let screenTopText = document.querySelector('.screen-top-text');
+let screenBottom = document.querySelector('.screen-bottom');
+let calc = new Calculator(screenTopText, screenBottom);
+let initialTopFontSize = +window.getComputedStyle(screenTopText).fontSize.replace('px', '');
+let topFontSize = initialTopFontSize;
+
 
 document.addEventListener('click', event => {
     let button = event.target;
@@ -144,4 +149,33 @@ document.addEventListener('click', event => {
     if (button.dataset.inversion != undefined) {
         calc.pressInversion()
     }
+    pressed();
 })
+
+// Screen size adaptation
+
+
+function pressed() {
+    console.log('Button pressed');
+    let screenWidth = screen.clientWidth;
+    let screenTopTextWidth = screenTopText.clientWidth;
+    let screenProportion = screenTopTextWidth / screenWidth;
+    
+    console.log(screenProportion, topFontSize);
+    if (screenProportion > 0.9) {
+        topFontSize *= 0.9;
+        screenTopText.style.fontSize = `${topFontSize}px`;
+    } else if (screenProportion < 0.8) {
+        topFontSize = Math.min(topFontSize / 0.9, initialTopFontSize);
+        // console.log(screenProportion, `${Math.min(topFontSize, initialTopFontSize)}px`);
+        screenTopText.style.fontSize = `${topFontSize}px`;
+    }
+}
+
+
+// let observer = new MutationObserver(pressed);
+// observer.observe(calcBox, {
+//     childList: true,
+//     subtree: true,
+//     attributes: true
+// })
