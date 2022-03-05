@@ -4,20 +4,19 @@
 body {
     background: linear-gradient(to bottom, #54a7ff, #87e1ff, #fff199, #ffd663);
     margin: 0;
+    touch-action: manipulation;
 }
 .calc {
     padding: 5px;
     border: 1px solid red;
     height: 100vh;
     display: grid;
-    grid: minmax(20vh, 80px) repeat(5, minmax(10vh, 50px)) / repeat(4, 90px);
+    grid: min(100px) repeat(5, minmax(10vh, 50px)) / repeat(4, 90px);
     gap: 3px;
     place-content: center;
 }
 .screen, .button {
-    /* border: 1px solid green; */
     box-shadow: inset 0 0 8px blue;
-
 }
 .button {
     line-height: 0.8;
@@ -29,30 +28,33 @@ body {
 }
 .screen {
     grid-column: 1/5;
-    text-align: right;
     padding: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .screen-top {
-    text-align: inherit;
-    font-size: max(1rem, calc(1.5rem + 3vh));
-    /* border: 1px solid red; */
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 .screen-bottom {
-    text-align: inherit;
-    font-size: 2.5rem;
-    font-weight: bold;
-    /* border: 1px solid red; */
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .screen-top-text {
-    display: inline-block;
-    /* border: 1px solid black;
-    background: red; */
+    font-size: 2.5rem;
+    line-height: 1;
 }
-
+.screen-bottom-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+}
 .clear {
     grid-column: span 2;
 }

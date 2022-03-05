@@ -121,11 +121,13 @@ class Calculator {
 
 let screen = document.querySelector('.screen');
 let screenTopText = document.querySelector('.screen-top-text');
-let screenBottom = document.querySelector('.screen-bottom');
-let calc = new Calculator(screenTopText, screenBottom);
-let initialTopFontSize = +window.getComputedStyle(screenTopText).fontSize.replace('px', '');
-let topFontSize = initialTopFontSize;
+let screenBottomText = document.querySelector('.screen-bottom-text');
+let calc = new Calculator(screenTopText, screenBottomText);
 
+let initialTopFontSize = +window.getComputedStyle(screenTopText).fontSize.replace('px', '');
+let initialBottomFontSize = +window.getComputedStyle(screenBottomText).fontSize.replace('px', '');
+let topFontSize = initialTopFontSize;
+let bottomFontSize = initialTopFontSize;
 
 document.addEventListener('click', event => {
     let button = event.target;
@@ -148,25 +150,33 @@ document.addEventListener('click', event => {
         calc.pressInversion()
     }
     pressed();
-})
+});
 
 // Screen font size adaptation
 function pressed() {
-    console.log('Button pressed');
     let screenWidth = screen.clientWidth;
+    
     let screenTopTextWidth = screenTopText.clientWidth;
-    let screenProportion = screenTopTextWidth / screenWidth;
-    
-    console.log(screenProportion, topFontSize);
-    
-    if (screenProportion == 0) {
+    let screenTopProportion = screenTopTextWidth / screenWidth;
+
+    let screenBottomTextWidth = screenBottomText.clientWidth;
+    let screenBottomProportion = screenBottomTextWidth / screenWidth;
+        
+    if (screenTopProportion == 0) {
         topFontSize = initialTopFontSize;
-        screenTopText.style.fontSize = `${topFontSize}px`;
-    } else if (screenProportion < 0.8) {
+    } else if (screenTopProportion < 0.8) {
         topFontSize = Math.min(topFontSize / 0.9, initialTopFontSize);
-        screenTopText.style.fontSize = `${topFontSize}px`;
-    } else if (screenProportion > 0.9) {
+    } else if (screenTopProportion > 0.95) {
         topFontSize *= 0.9;
-        screenTopText.style.fontSize = `${topFontSize}px`;
-    } 
+    }
+    screenTopText.style.fontSize = `${topFontSize}px`;
+
+    if (screenBottomProportion == 0) {
+        bottomFontSize = initialBottomFontSize;
+    } else if (screenBottomProportion < 0.8) {
+        bottomFontSize = Math.min(bottomFontSize / 0.9, initialBottomFontSize);
+    } else if (screenBottomProportion > 0.95) {
+        bottomFontSize *= 0.8;
+    }
+    screenBottomText.style.fontSize = `${bottomFontSize}px`;
 }
