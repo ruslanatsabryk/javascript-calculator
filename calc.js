@@ -78,7 +78,6 @@ class Calculator {
     }
 
     pressOperation(operation) {
-        // let lastChar = this.calcString[this.calcString.length - 1];
         if (this.pressedBefore == 'operation' || this.pressedBefore == 'backspace') {
             this.calcString = this.calcString.slice(0, -1)
         }
@@ -120,7 +119,6 @@ class Calculator {
     }
 }
 
-// let calcBox = document.querySelector('.calc');
 let screen = document.querySelector('.screen');
 let screenTopText = document.querySelector('.screen-top-text');
 let screenBottom = document.querySelector('.screen-bottom');
@@ -152,9 +150,7 @@ document.addEventListener('click', event => {
     pressed();
 })
 
-// Screen size adaptation
-
-
+// Screen font size adaptation
 function pressed() {
     console.log('Button pressed');
     let screenWidth = screen.clientWidth;
@@ -162,20 +158,15 @@ function pressed() {
     let screenProportion = screenTopTextWidth / screenWidth;
     
     console.log(screenProportion, topFontSize);
-    if (screenProportion > 0.9) {
-        topFontSize *= 0.9;
+    
+    if (screenProportion == 0) {
+        topFontSize = initialTopFontSize;
         screenTopText.style.fontSize = `${topFontSize}px`;
     } else if (screenProportion < 0.8) {
         topFontSize = Math.min(topFontSize / 0.9, initialTopFontSize);
-        // console.log(screenProportion, `${Math.min(topFontSize, initialTopFontSize)}px`);
         screenTopText.style.fontSize = `${topFontSize}px`;
-    }
+    } else if (screenProportion > 0.9) {
+        topFontSize *= 0.9;
+        screenTopText.style.fontSize = `${topFontSize}px`;
+    } 
 }
-
-
-// let observer = new MutationObserver(pressed);
-// observer.observe(calcBox, {
-//     childList: true,
-//     subtree: true,
-//     attributes: true
-// })
