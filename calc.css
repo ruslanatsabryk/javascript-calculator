@@ -11,16 +11,32 @@ body {
     border: 1px solid red;
     height: 100vh;
     display: grid;
-    grid: min(100px) repeat(5, minmax(10vh, 50px)) / repeat(4, 90px);
+    /* Mobile first */
+    grid: 1.5fr repeat(5, 1fr) / repeat(4, 1fr);
     gap: 3px;
     place-content: center;
 }
+
+/* Mobile and landscape */
+@media screen and (orientation: landscape) and (min-resolution: 2dppx) {
+    .calc {
+        grid: 2.5fr repeat(5, 1fr) / repeat(4, 1fr);
+    }
+}
+/* Desktop */
+@media screen and (max-resolution: 1dppx) {
+    .calc {
+        grid: min(100px) repeat(5, minmax(10vh, 50px)) / repeat(4, 90px);
+    }
+    
+}
+
 .screen, .button {
     box-shadow: inset 0 0 8px blue;
 }
 .button {
     line-height: 0.8;
-    font-size: max(1rem, calc(1rem + 2.5vh));
+    font-size: calc(1rem + 4vh);
     display: grid;
     place-items: center;
     user-select: none;
@@ -45,7 +61,6 @@ body {
     justify-content: flex-end;
     align-items: center;
 }
-
 .screen-top-text {
     font-size: 2.5rem;
     line-height: 1;
